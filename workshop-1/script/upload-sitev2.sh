@@ -43,6 +43,9 @@ sed -i "s|REPLACE_ME_WEB_ENDPOINT|$BUCKET_NAME.s3.amazonaws.com|g" $TEMP_DIR/con
 
 echo "Syncing files to S3 bucket: $BUCKET_NAME"
 aws s3 sync $TEMP_DIR s3://$BUCKET_NAME
-aws s3 cp /environment/workshop-1/web/images s3://$BUCKET_NAME/images --recursive
 
-echo "Upload complete. Website URL: http://$BUCKET_NAME.s3.website-$REGION.amazonaws.com"
+# Upload images to the correct path
+echo "Uploading images to web/images path"
+aws s3 cp /environment/workshop-1/web/images s3://$BUCKET_NAME/web/images --recursive
+
+echo "Upload complete. Website URL: http://$BUCKET_NAME.s3-website-$REGION.amazonaws.com"
